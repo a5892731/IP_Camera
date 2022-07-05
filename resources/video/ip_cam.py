@@ -18,21 +18,44 @@ class Ip_Camera():
     def __init__(self):
         '''
         the ONVIF Device Manager program can be helpful in importing full url of ip camera
+
+        rtsp://192.168.1.201:554/mpeg4?username=admin&password=E10ADC3949BA59ABBE56E057F20F883E
         '''
-        self.url = 'rtsp://192.168.1.201:554/mpeg4?username=admin&password=E10ADC3949BA59ABBE56E057F20F883E'
-        self.url2 = 'rtsp://192.168.1.200:554/mpeg4?username=admin&password=E10ADC3949BA59ABBE56E057F20F883E'
+
+        self.ip = '192.168.1.201'
+        #self.ip = '192.168.1.202'
+        self.dns = '192.168.1.1'
+        self.http_port = '80'
+        self.rtsp_port = '554'
+        self.username = "admin"
+        self.password = 'E10ADC3949BA59ABBE56E057F20F883E'
+
+        self.frame_width= 640
+        self.frame_height = 480
+
+        self.url = 'rtsp://' + self.ip + ':' + self.rtsp_port + \
+                   '/mpeg4?' + 'username=' + self.username + '&password=' + self.password
+
         self.connection = False
 
 
     def connect_to_camera(self):
-        self.cap = cv2.VideoCapture(self.url2)
 
+        self.cap = cv2.VideoCapture(self.url)
+
+        self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, self.frame_width)
+        self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, self.frame_height)
 
     def refresh(self):
         '''
         this function need to be in while loop
         '''
         ret, frame = self.cap.read()
+
+        #ret, frame = self.cap.get()
+
+
+
         cv2.imshow('frame', frame)
         k = cv2.waitKey(1)
 
