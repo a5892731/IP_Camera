@@ -20,11 +20,12 @@ class Ip_Camera():
         the ONVIF Device Manager program can be helpful in importing full url of ip camera
         '''
         self.url = 'rtsp://192.168.1.201:554/mpeg4?username=admin&password=E10ADC3949BA59ABBE56E057F20F883E'
+        self.url2 = 'rtsp://192.168.1.200:554/mpeg4?username=admin&password=E10ADC3949BA59ABBE56E057F20F883E'
         self.connection = False
 
 
     def connect_to_camera(self):
-        self.cap = cv2.VideoCapture(self.url)
+        self.cap = cv2.VideoCapture(self.url2)
 
 
     def refresh(self):
@@ -44,12 +45,14 @@ class Ip_Camera():
 
 
 if __name__ == "__main__":
-
     camera = Ip_Camera()
-
-
+    print("0")
+    camera.connect_to_camera()
+    print("1")
     while True:
+        print("2")
         camera.refresh()
+        print("3")
 
     camera.disconect()
 
