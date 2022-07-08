@@ -39,8 +39,12 @@ class Ip_Camera():
         self.connection = False
 
     def ping_camera(self):
-        self.connection = system("ping -c 1 " + self.ip)
+        ping= system("ping -n 1 " + self.ip) # FOR WINDOWS
 
+        if ping == 0:
+            self.connection = True
+        else:
+            self.connection = False
 
     def connect_to_camera(self):
         '''
@@ -52,8 +56,6 @@ class Ip_Camera():
         if self.connection:
             self.cap = cv2.VideoCapture(self.url)
 
-            self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, self.frame_width)
-            self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, self.frame_height)
 
     def refresh_standard(self):
         '''
@@ -61,7 +63,6 @@ class Ip_Camera():
         '''
         if self.connection:
             ret, frame = self.cap.read()
-
             cv2.imshow('frame', frame)
             k = cv2.waitKey(1)
 
@@ -69,8 +70,14 @@ class Ip_Camera():
         '''
         this function need to be in while loop
         '''
+
+
         if self.connection:
+
+
             ret, frame = self.cap.read()
+            print(ret)
+
 
 
             img = self.resize_image(image = Image.fromarray(frame), max_side_size = video_image_max_side_size)
@@ -78,6 +85,7 @@ class Ip_Camera():
                 self.image = ImageTk.PhotoImage(img)
             except:
                 cv2.destroyAllWindows()
+
 
     def resize_image(self, image, max_side_size):
         '''function is resizing image by his longest side to "max_side_size"
