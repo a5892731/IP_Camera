@@ -12,8 +12,6 @@ import cv2
 
 from PIL import Image, ImageTk
 
-from resources.gui.functions.import_image import re_sizer
-
 
 class Ip_Camera():
 
@@ -60,13 +58,13 @@ class Ip_Camera():
         cv2.imshow('frame', frame)
         k = cv2.waitKey(1)
 
-    def refresh_image(self, max = 200):
+    def refresh_image(self, max = 600):
         '''
         this function need to be in while loop
         '''
         ret, frame = self.cap.read()
 
-        width, height = frame.size
+        width, height = Image.fromarray(frame).size
 
         if height > width:
             scale = height / max
@@ -77,8 +75,11 @@ class Ip_Camera():
             width = width / scale
             height = height / scale
 
-        frame = frame.resize((int(width), int((height))), Image.ANTIALIAS)
-        self.image = ImageTk.PhotoImage(frame)
+        width = int(width)
+        height = int(height)
+
+        img = Image.fromarray(frame).resize((width, height))
+        self.image = ImageTk.PhotoImage(img)
 
 
 
