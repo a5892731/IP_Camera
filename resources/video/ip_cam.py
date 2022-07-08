@@ -21,11 +21,10 @@ class Ip_Camera():
         '''
         the ONVIF Device Manager program can be helpful in importing full url of ip camera
 
-        rtsp://192.168.1.201:554/mpeg4?username=admin&password=E10ADC3949BA59ABBE56E057F20F883E
+        rtsp://192.168.1.200:554/mpeg4?username=admin&password=E10ADC3949BA59ABBE56E057F20F883E
         '''
 
         self.ip = '192.168.1.200'
-        #self.ip = '192.168.1.201'
         self.dns = '192.168.1.1'
         self.http_port = '80'
         self.rtsp_port = '554'
@@ -58,7 +57,6 @@ class Ip_Camera():
         if self.connection:
             self.cap = cv2.VideoCapture(self.url)
 
-
     def refresh_standard(self):
         '''
         this function need to be in while loop
@@ -87,7 +85,6 @@ class Ip_Camera():
                 self.image = ImageTk.PhotoImage(img)
             except:
                 pass
-
 
     def resize_image(self, image, max_side_size):
         '''function is resizing image by his longest side to "max_side_size"
