@@ -52,7 +52,8 @@ class ProgramRun:
         '''camera initialization'''
         self.camera1 = Ip_Camera()
         self.camera1.connect_to_camera()
-        self.camera1.refresh_image()
+        self.camera_1_size = 300
+        self.camera1.refresh_image(max_side_size = self.camera_1_size)
 
         '''build wiindow'''
         self.build_main_window()
