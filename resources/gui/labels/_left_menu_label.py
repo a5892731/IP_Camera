@@ -11,7 +11,7 @@ def left_menu_bar(self):
     menu.grid(column=1, row=0, sticky="nesw")
 
     button(label=menu, text="PLAY", command=self.play, column=0, row=0)
-    button(label=menu, text="PLAY", command=self.stop, column=0, row=1)
+    button(label=menu, text="STOP", command=self.stop, column=0, row=1)
 
     for i in range(2,16):
         button(label=menu, text="", command="", column=0, row=i)  # row space
