@@ -42,7 +42,7 @@ def build_main_window(self):
 def update_window(self):
 
     '''camera tasks'''
-    if self.camera1.connecton:
+    if self.camera1.connection:
         try:
             '''update camera label 
             label from resources.gui.labels._central_window'''
