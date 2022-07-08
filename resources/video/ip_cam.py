@@ -12,6 +12,8 @@ import cv2
 
 from PIL import Image, ImageTk
 
+from resources.gui.functions.import_image import re_sizer
+
 
 class Ip_Camera():
 
@@ -64,8 +66,9 @@ class Ip_Camera():
         '''
         ret, frame = self.cap.read()
 
-        self.image = ImageTk.PhotoImage(Image.fromarray(frame))
 
+        self.image = ImageTk.PhotoImage(Image.fromarray(frame))
+        self.image = re_sizer(self.image, max=200)
 
 
     def disconnect(self):
