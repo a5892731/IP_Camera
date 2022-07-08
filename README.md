@@ -7,7 +7,7 @@ Before start configure your camera in camera operation class named: "IP_Camera()
 You will find it in "resources/video" folder.
 
 The IP_Camera class:
-![img.png](info/camera _operation_class.png)
+![img.png](info/camera_operation_class.png)
 * __init__() > configuration data (IP, PORT, User, Pass)
 * ping_camera() > check connection to camera on start. If not, video won't start.
 * connect_to_camera() > in there is ping to camera > set connection
