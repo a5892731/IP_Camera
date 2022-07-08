@@ -7,6 +7,15 @@
 # This is a simple template for add video to Tkinter GUI
 
 '''
+requirements
+
+firewall turn OFF
+camera address  '192.168.1.200'
+
+'''
+
+
+'''
 GUI based on:
 https://github.com/a5892731/GUI_template
 
@@ -53,7 +62,7 @@ class ProgramRun:
         self.camera1 = Ip_Camera()
         self.camera1.connect_to_camera()
         self.camera_1_size = 300
-        self.camera1.refresh_image(max_side_size = self.camera_1_size)
+        self.camera1.refresh_image(video_image_max_side_size = self.camera_1_size)
 
         '''build wiindow'''
         self.build_main_window()

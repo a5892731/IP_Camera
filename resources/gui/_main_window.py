@@ -45,7 +45,7 @@ def update_window(self):
     try:
         '''update camera label 
         label from resources.gui.labels._central_window'''
-        self.camera1.refresh_image(max_side_size = self.camera_1_size)
+        self.camera1.refresh_image(video_image_max_side_size = self.camera_1_size)
         self.camera_viev1.config(image=self.camera1.image)
 
 

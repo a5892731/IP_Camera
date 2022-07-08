@@ -10,6 +10,8 @@
 
 import cv2
 
+from os import system
+
 from PIL import Image, ImageTk
 
 
@@ -30,47 +32,57 @@ class Ip_Camera():
         self.username = "admin"
         self.password = 'E10ADC3949BA59ABBE56E057F20F883E'
 
-        self.frame_width= 640
-        self.frame_height = 480
-
         self.url = 'rtsp://' + self.ip + ':' + self.rtsp_port + \
                    '/mpeg4?' + 'username=' + self.username + '&password=' + self.password
 
+
         self.connection = False
+
+    def ping_camera(self):
+        self.connection = system("ping -c 1 " + self.ip)
+
 
     def connect_to_camera(self):
         '''
         ping camera?
 
         '''
+        self.ping_camera()
 
-        self.cap = cv2.VideoCapture(self.url)
+        if self.connection:
+            self.cap = cv2.VideoCapture(self.url)
 
-        self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, self.frame_width)
-        self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, self.frame_height)
+            self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, self.frame_width)
+            self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, self.frame_height)
 
     def refresh_standard(self):
         '''
         this function need to be in while loop
         '''
-        ret, frame = self.cap.read()
+        if self.connection:
+            ret, frame = self.cap.read()
 
-        cv2.imshow('frame', frame)
-        k = cv2.waitKey(1)
+            cv2.imshow('frame', frame)
+            k = cv2.waitKey(1)
 
-    def refresh_image(self, max_side_size = 600):
+    def refresh_image(self, video_image_max_side_size = 600):
         '''
         this function need to be in while loop
         '''
-        ret, frame = self.cap.read()
+        if self.connection:
+            ret, frame = self.cap.read()
 
-        img = self.resize_image(image = Image.fromarray(frame), max_side_size = 600)
-        try:
-            self.image = ImageTk.PhotoImage(img)
-        except:
-            cv2.destroyAllWindows()
+
+            img = self.resize_image(image = Image.fromarray(frame), max_side_size = video_image_max_side_size)
+            try:
+                self.image = ImageTk.PhotoImage(img)
+            except:
+                cv2.destroyAllWindows()
 
     def resize_image(self, image, max_side_size):
+        '''function is resizing image by his longest side to "max_side_size"
+        other side is proportional to original'''
+
         width, height = image.size
 
         if height > width:
