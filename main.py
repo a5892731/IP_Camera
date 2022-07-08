@@ -43,6 +43,12 @@ class ProgramRun:
         self.window = Tk()
         self.window_variables_init()
         self.set_variable_default_values()
+
+
+        self.camera1 = Ip_Camera()
+        self.camera1.connect_to_camera()
+        self.camera1.refresh_image()
+
         self.build_main_window()
 
         self.main_loop()
@@ -55,17 +61,11 @@ class ProgramRun:
         '''
         #device = StateLoader()
 
-        self.camera1 = Ip_Camera()
-        print("0")
-        self.camera1.connect_to_camera()
-        print("1")
-
-
         while True:
-            print("2")
+            '''camera tasks'''
             self.camera1.refresh_image()
-            print("3")
-
+            self.camera_viev1.config(image=self.camera1.image)
+            '''*/'''
 
 
             self.update_window()

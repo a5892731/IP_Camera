@@ -22,8 +22,8 @@ class Ip_Camera():
         rtsp://192.168.1.201:554/mpeg4?username=admin&password=E10ADC3949BA59ABBE56E057F20F883E
         '''
 
-        self.ip = '192.168.1.201'
-        #self.ip = '192.168.1.202'
+        self.ip = '192.168.1.200'
+        #self.ip = '192.168.1.201'
         self.dns = '192.168.1.1'
         self.http_port = '80'
         self.rtsp_port = '554'
@@ -38,8 +38,11 @@ class Ip_Camera():
 
         self.connection = False
 
-
     def connect_to_camera(self):
+        '''
+        ping camera?
+
+        '''
 
         self.cap = cv2.VideoCapture(self.url)
 

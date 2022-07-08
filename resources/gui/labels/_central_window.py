@@ -1,6 +1,6 @@
 from tkinter import LabelFrame
 
-from resources.gui.widgets.label import label
+from resources.gui.widgets.label_image import label_image
 
 
 
@@ -10,9 +10,10 @@ def centrtal_window(self):
     menu = LabelFrame(self.main_label, text="CENTRAL WINDOW", background="#cfd1cf", bd=5)
     menu.grid(column=0, row=0, sticky="nesw")
 
-    L1 = label(menu, column=0, row=0,)
 
-    L1['image'] = self.camera1.image
+    self.camera_viev1 = label_image(menu, image = self.camera1.image, column=0, row=0, text="", columnspan=1, )
+
+
 
 
 
