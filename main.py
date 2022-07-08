@@ -64,7 +64,10 @@ class ProgramRun:
         while True:
             '''camera tasks'''
             self.camera1.refresh_image()
-            self.camera_viev1.config(image=self.camera1.image)
+            try:
+                self.camera_viev1.config(image=self.camera1.image)
+            except:
+                print("no video")
             '''*/'''
 
 

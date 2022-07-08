@@ -65,10 +65,13 @@ class Ip_Camera():
         ret, frame = self.cap.read()
 
         img = self.resize_image(image = Image.fromarray(frame), max_side_size = 600)
-        self.image = ImageTk.PhotoImage(img)
+        try:
+            self.image = ImageTk.PhotoImage(img)
+        except:
+            cv2.destroyAllWindows()
 
     def resize_image(self, image, max_side_size):
-        width, height = Image.fromarray(image).size
+        width, height = image.size
 
         if height > width:
             scale = height / max_side_size
