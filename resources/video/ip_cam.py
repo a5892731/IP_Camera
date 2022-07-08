@@ -70,16 +70,8 @@ class Ip_Camera():
         '''
         this function need to be in while loop
         '''
-
-
         if self.connection:
-
-
             ret, frame = self.cap.read()
-            print(ret)
-
-
-
             img = self.resize_image(image = Image.fromarray(frame), max_side_size = video_image_max_side_size)
             try:
                 self.image = ImageTk.PhotoImage(img)

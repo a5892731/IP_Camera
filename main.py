@@ -48,7 +48,7 @@ class ProgramRun:
     from resources.gui._main_window import build_main_window, update_window
 
     '''>>> imports used in other files connected to this class'''
-    from resources.gui.labels._left_menu_label import left_menu_bar, exit_program, button_1
+    from resources.gui.labels._left_menu_label import left_menu_bar, exit_program, play, stop
     from resources.gui.labels._central_window import centrtal_window
     '''<<< imports used in other files connected to this class'''
 
@@ -61,9 +61,9 @@ class ProgramRun:
 
         '''camera initialization'''
         self.camera1 = Ip_Camera()
-        self.camera1.connect_to_camera()
-        self.camera_1_size = 640
-        self.camera1.refresh_image(video_image_max_side_size = self.camera_1_size)
+        #self.camera1.connect_to_camera()
+        #self.camera_1_size = 640
+        #self.camera1.refresh_image(video_image_max_side_size = self.camera_1_size)
 
         '''build wiindow'''
         self.build_main_window()
