@@ -32,6 +32,7 @@ def build_main_window(self):
     def draw_default_labels():
         '''draw default labels on program start'''
         self.left_menu_bar()
+        self.centrtal_window()
 
     '''--------------------------------------------------------------------------------------------------------------'''
     draw_window_attributes()

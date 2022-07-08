@@ -24,16 +24,16 @@ project
 
 #from resources.state_machine.state_loader import StateLoader
 
+from resources.video.ip_cam import Ip_Camera
 
 
 class ProgramRun:
-    from resources.gui._gui_variables import window_variables_init, set_variable_default_values, \
-                                             import_variables_to_gui, export_variables_from_gui
+    from resources.gui._gui_variables import window_variables_init, set_variable_default_values
     from resources.gui._main_window import build_main_window, update_window
 
     '''>>> imports used in other files connected to this class'''
     from resources.gui.labels._left_menu_label import left_menu_bar, exit_program, button_1
-
+    from resources.gui.labels._central_window import centrtal_window
 
 
 
@@ -55,7 +55,18 @@ class ProgramRun:
         '''
         #device = StateLoader()
 
+        self.camera1 = Ip_Camera()
+        print("0")
+        self.camera1.connect_to_camera()
+        print("1")
+
+
         while True:
+            print("2")
+            self.camera1.refresh_image()
+            print("3")
+
+
 
             self.update_window()
 
@@ -68,6 +79,7 @@ class ProgramRun:
             '''
             #device.on_event(self, 'device_locked',)  # call the state machine events
 
+        self.camera1.disconect()
 
 
 

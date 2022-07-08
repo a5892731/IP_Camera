@@ -10,7 +10,7 @@
 
 import cv2
 
-
+from PIL import Image, ImageTk
 
 
 class Ip_Camera():
@@ -46,18 +46,23 @@ class Ip_Camera():
         self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, self.frame_width)
         self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, self.frame_height)
 
-    def refresh(self):
+    def refresh_standard(self):
         '''
         this function need to be in while loop
         '''
         ret, frame = self.cap.read()
 
-        #ret, frame = self.cap.get()
-
-
-
         cv2.imshow('frame', frame)
         k = cv2.waitKey(1)
+
+    def refresh_image(self):
+        '''
+        this function need to be in while loop
+        '''
+        ret, frame = self.cap.read()
+
+        self.image = ImageTk.PhotoImage(Image.fromarray(frame))
+
 
 
     def disconnect(self):
@@ -74,7 +79,7 @@ if __name__ == "__main__":
     print("1")
     while True:
         print("2")
-        camera.refresh()
+        camera.refresh_standard()
         print("3")
 
     camera.disconect()
