@@ -83,7 +83,10 @@ class Ip_Camera():
         else:
             image = Image.open("resources/video/no_camera.jpeg")
             img = self.resize_image(image=image, max_side_size=video_image_max_side_size)
-            self.image = ImageTk.PhotoImage(img)
+            try:
+                self.image = ImageTk.PhotoImage(img)
+            except:
+                pass
 
 
     def resize_image(self, image, max_side_size):
