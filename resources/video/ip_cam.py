@@ -10,7 +10,7 @@
 
 import cv2
 
-
+from PIL import Image, ImageTk
 
 
 class Ip_Camera():
@@ -22,49 +22,48 @@ class Ip_Camera():
         rtsp://192.168.1.201:554/mpeg4?username=admin&password=E10ADC3949BA59ABBE56E057F20F883E
         '''
 
-        self.ip = '192.168.1.200'
-        #self.ip = '192.168.1.201'
+        self.ip = '192.168.1.201'
+        #self.ip = '192.168.1.202'
         self.dns = '192.168.1.1'
         self.http_port = '80'
         self.rtsp_port = '554'
         self.username = "admin"
         self.password = 'E10ADC3949BA59ABBE56E057F20F883E'
 
-        self.frame_width= 320
-        self.frame_height = 240
+        self.frame_width= 640
+        self.frame_height = 480
 
         self.url = 'rtsp://' + self.ip + ':' + self.rtsp_port + \
                    '/mpeg4?' + 'username=' + self.username + '&password=' + self.password
 
-        #self.url = 'rtsp://192.168.1.200:554/mpeg4?username=admin&password=E10ADC3949BA59ABBE56E057F20F883E'
-
-        self.connection = True
+        self.connection = False
 
 
     def connect_to_camera(self):
 
         self.cap = cv2.VideoCapture(self.url)
 
-        #self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, self.frame_width)
-        #self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, self.frame_height)
+        self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, self.frame_width)
+        self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, self.frame_height)
 
-
-    def refresh(self):
+    def refresh_standard(self):
         '''
         this function need to be in while loop
         '''
-
         ret, frame = self.cap.read()
-
-
-        #ret, frame = self.cap.get()
-
-
 
         cv2.imshow('frame', frame)
         k = cv2.waitKey(1)
 
-        self.connection = self.cap.isOpened()
+    def refresh_image(self):
+        '''
+        this function need to be in while loop
+        '''
+        ret, frame = self.cap.read()
+
+        self.image = ImageTk.PhotoImage(Image.fromarray(frame))
+
+
 
     def disconnect(self):
         '''
@@ -78,12 +77,12 @@ if __name__ == "__main__":
     print("0")
     camera.connect_to_camera()
     print("1")
-    while camera.connection:
+    while True:
         print("2")
-        camera.refresh()
+        camera.refresh_standard()
         print("3")
 
-    camera.disconnect()
+    camera.disconect()
 
 
 

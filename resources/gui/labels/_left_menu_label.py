@@ -1,4 +1,4 @@
-from tkinter import *
+from tkinter import LabelFrame
 
 from resources.gui.widgets.button import button
 
