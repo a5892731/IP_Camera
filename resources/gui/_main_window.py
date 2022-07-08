@@ -40,6 +40,16 @@ def build_main_window(self):
     draw_default_labels()
 
 def update_window(self):
+
+    '''camera tasks'''
+    try:
+        '''update camera label 
+        label from resources.gui.labels._central_window'''
+        self.camera_viev1.config(image=self.camera1.image)
+    except:
+        print("no video")
+    '''*/'''
+
     try:
         self.window.update_idletasks()
         self.window.update()

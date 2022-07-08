@@ -1,10 +1,17 @@
 # author: a5892731
-# date: 11.05.2022
-# last update: 30.05.2022
-# version: 1.1
+# creation date: 20220-07-05
+# last modification: 20220-07-08
+# version 1.0
 #
 # description:
-# This is a simple template for programs with Graphic User Interface
+# This is a simple template for add video to Tkinter GUI
+
+'''
+GUI based on:
+https://github.com/a5892731/GUI_template
+
+'''
+
 
 '''
 imports
@@ -26,7 +33,6 @@ project
 
 from resources.video.ip_cam import Ip_Camera
 
-
 class ProgramRun:
     from resources.gui._gui_variables import window_variables_init, set_variable_default_values
     from resources.gui._main_window import build_main_window, update_window
@@ -34,23 +40,24 @@ class ProgramRun:
     '''>>> imports used in other files connected to this class'''
     from resources.gui.labels._left_menu_label import left_menu_bar, exit_program, button_1
     from resources.gui.labels._central_window import centrtal_window
-
-
-
-
     '''<<< imports used in other files connected to this class'''
+
+
     def __init__(self,):
+        '''create window atributes'''
         self.window = Tk()
         self.window_variables_init()
         self.set_variable_default_values()
 
-
+        '''camera initialization'''
         self.camera1 = Ip_Camera()
         self.camera1.connect_to_camera()
         self.camera1.refresh_image()
 
+        '''build wiindow'''
         self.build_main_window()
 
+        '''execute program'''
         self.main_loop()
 
     def main_loop(self):
@@ -62,27 +69,13 @@ class ProgramRun:
         #device = StateLoader()
 
         while True:
-            '''camera tasks'''
-            self.camera1.refresh_image()
-            try:
-                self.camera_viev1.config(image=self.camera1.image)
-            except:
-                print("no video")
-            '''*/'''
-
-
             self.update_window()
-
-
-
             '''
             state loader is implemented to GUI in:
             https://github.com/a5892731/GUI_template
             project
             '''
             #device.on_event(self, 'device_locked',)  # call the state machine events
-
-        self.camera1.disconect()
 
 
 
