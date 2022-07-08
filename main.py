@@ -81,6 +81,10 @@ class ProgramRun:
 
         while True:
             self.update_window()
+
+            self.camera1.play = True # temporary
+
+
             '''
             state loader is implemented to GUI in:
             https://github.com/a5892731/GUI_template
