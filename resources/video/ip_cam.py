@@ -58,32 +58,31 @@ class Ip_Camera():
         cv2.imshow('frame', frame)
         k = cv2.waitKey(1)
 
-    def refresh_image(self, max = 600):
+    def refresh_image(self, max_side_size = 600):
         '''
         this function need to be in while loop
         '''
         ret, frame = self.cap.read()
 
-        width, height = Image.fromarray(frame).size
+        img = self.resize_image(image = Image.fromarray(frame), max_side_size = 600)
+        self.image = ImageTk.PhotoImage(img)
+
+    def resize_image(self, image, max_side_size):
+        width, height = Image.fromarray(image).size
 
         if height > width:
-            scale = height / max
+            scale = height / max_side_size
             width = width / scale
             height = height / scale
         else:
-            scale = width / max
+            scale = width / max_side_size
             width = width / scale
             height = height / scale
 
         width = int(width)
         height = int(height)
 
-        img = Image.fromarray(frame).resize((width, height))
-        self.image = ImageTk.PhotoImage(img)
-
-
-
-
+        return image.resize((width, height))
 
     def disconnect(self):
         '''
