@@ -82,7 +82,7 @@ class ProgramRun:
         while True:
             self.update_window()
 
-            self.camera1.play = True # temporary
+
 
 
             '''
