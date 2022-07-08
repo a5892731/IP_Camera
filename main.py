@@ -84,7 +84,6 @@ class ProgramRun:
 
 
 
-
             '''
             state loader is implemented to GUI in:
             https://github.com/a5892731/GUI_template
