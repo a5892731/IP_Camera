@@ -10,7 +10,7 @@ The IP_Camera class:
 ![img.png](info/camera_operation_class.png)
 * __init__() > configuration data (IP, PORT, User, Pass)
 * ping_camera() > check connection to camera on start. If not, video won't start.
-* connect_to_camera() > in there is ping to camera > set connection
+* connect_to_camera() > set connection if ping was positive
 * refresh_standard() > this works without Tkinter GUI. Run ip_cam.py file instead main.py and see.
 * refresh_image() > this is refresh function for rTkinter GUI.
 
